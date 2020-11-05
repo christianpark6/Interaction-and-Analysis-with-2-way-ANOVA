@@ -1,0 +1,56 @@
+library(psych)
+##Analysis of Dataset that looks at Firefighters test scores finding interaction and significant predictors.
+Ricci <- read.csv("Ricci.csv")
+with(Ricci,boxplot(Combine~Position))
+with(Ricci,boxplot(Combine~Race))
+with(Ricci,boxplot(Combine~Position*Race))
+with(Ricci, interaction.plot(Race, Position, Combine))
+mod = with(Ricci, aov(Combine~Race + Position + Race:Position))
+anova(mod)
+summary(mod)
+plot(mod)
+TukeyHSD(with(Ricci, aov(Combine~Race)))
+with(Ricci, describeBy(Combine,Race,Position))
+
+##Analysis of Dataset that looks at Fruit Flies finding interaction and analyzing treatment groups and the effect on lifespan.
+
+FruitFlies <- read.csv("FruitFlies2.csv")
+
+with(FruitFlies,boxplot(Lifespan~Alone))
+with(FruitFlies,boxplot(Lifespan~Mated))
+with(FruitFlies,boxplot(Lifespan~Mated*Alone))
+par(mfrow=c(1,1))
+with(FruitFlies, interaction.plot(as.factor(Mated), as.factor(Alone), Lifespan))
+mod2 = with(FruitFlies, aov(Lifespan~as.factor(Mated) + as.factor(Alone) + as.factor(Mated):as.factor(Alone)))
+anova(mod2)
+plot(mod2)
+par(mfrow=c(2,2))
+TukeyHSD(with(FruitFlies, aov(Lifespan~Alone:Mated)))
+
+##Analysis of Dataset that looks at Fruit Flies finding interaction and analyzing treatment groups and the effect on Activity.
+with(FruitFlies,boxplot(Activity~Alone))
+with(FruitFlies,boxplot(Activity~Mated))
+with(FruitFlies,boxplot(Activity~Mated*Alone))
+with(FruitFlies, describeBy(Activity,Mated,Alone))
+
+with(FruitFlies, interaction.plot( as.factor(Mated), as.factor(Alone), Activity))
+mod3 = with(FruitFlies, aov(Activity~as.factor(Mated) + as.factor(Alone) + as.factor(Mated):as.factor(Alone)))
+anova(mod3)
+plot(mod3)
+par(mfrow=c(2,2))
+TukeyHSD(with(FruitFlies, aov(Activity~Alone)))
+
+##Analysis of Dataset that looks at Firefighters finding interaction and analyzing Race and Position and its effect on Oral Test Scores.
+par(mfrow=c(2,1))
+with(Ricci,boxplot(Oral~Position))
+with(Ricci,boxplot(Oral~Race))
+with(Ricci,boxplot(Oral~Position*Race))
+with(Ricci, describeBy(Oral,Position,Race))
+par(mfrow=c(1,1))
+with(Ricci, interaction.plot(Race, Position, Oral))
+mod4 = with(Ricci, aov(Oral~as.factor(Race) + as.factor(Position) + as.factor(Race):as.factor(Position)))
+anova(mod4)
+summary(mod4)
+plot(mod4)
+TukeyHSD(with(Ricci, aov(Oral~Race)))
+TukeyHSD(with(Ricci, aov(Oral~as.factor(Position))))
