@@ -1,1 +1,2 @@
 # Interaction-and-Analysis-with-2-way-ANOVA
+Below I have included the R scripts I created for doing Data Modeling homework out of the Textbook: Cannon, A. R. et al (2019). STAT2: Modeling with Regression and ANOVA, Se. The Problems completed in this homework include the basics of creating Multivariate regressions to analyze the datasets. The basis of the homework invovled working with 2-way ANOVA and creating interaction plots between predictors to gain a feel for what strong interaction between predictors look like. 
